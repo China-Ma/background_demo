@@ -12,4 +12,5 @@ public interface LoginService {
 
     boolean login(Login login);
 
+    boolean changePwd(Login login);
 }

@@ -40,4 +40,16 @@ public class LoginServiceImpl implements LoginService{
         }
         return false;
     }
+
+    @Override
+    public boolean changePwd(Login login) {
+        LoginExample example = new LoginExample();
+        LoginExample.Criteria criteria = example.createCriteria();
+        criteria.andUsernameEqualTo(login.getUsername());
+        int i = loginMapper.updateByExampleSelective(login,example);
+        if (i > 0 ){
+            return true;
+        }
+        return false;
+    }
 }

@@ -29,6 +29,24 @@ public class AdminController {
         return "login";
     }
 
+    @RequestMapping(value = "/change_pwd",method = RequestMethod.POST)
+    public String changePwd(Login login){
+        boolean flag = loginService.changePwd(login);
+        if (flag){
+            return "login";
+        }
+        return "fail";
+    }
+
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public String register(Login login){
+        boolean flag = loginService.register(login);
+        if (flag){
+            return "login";
+        }
+        return "fail";
+    }
+
     @RequestMapping(value = "/dologin",method = RequestMethod.POST)
     public String login(Login login, HttpServletRequest request){
         boolean flag = loginService.login(login);

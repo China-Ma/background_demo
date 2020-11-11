@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修复密码</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+</head>
+<body>
+    <div class="outer_frame">
+        <div class="inter_frame">
+            <form action="/change_pwd" method="post">
+                <h2 style="padding-left: 10px">密码修改</h2>
+                <p style="color: #9b9c98;padding-left: 10px">请输入账号和新密码</p>
+                <div>
+                    <input name="username" type="text" style="" placeholder="用户名" required>
+                </div>
+
+                <div>
+                    <input name="password" type="password" placeholder="新密码" required>
+                </div>
+
+                <div class="bt1">
+                    <button type="submit">修改</button>
+                </div>
+
+                <div class="bt2">
+                    <button type="reset">重置</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
