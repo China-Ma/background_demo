@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     //这个方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, ServletException {
         //每一个项目对于登陆的实现逻辑都有所区别，我这里使用最简单的Session提取User来验证登陆
 
 
@@ -36,9 +37,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         } else {
         //如果session里有user，表示该用户已经登陆，放行，用户即可继续调用自己需要的接口
         System.out.println("进入拦截器......");
-        String str= request.getRequestURL().toString();
         System.out.println(request.getRequestURL());
-        response.sendRedirect(request.getRequestURL().toString());
+        response.sendRedirect(request.getRequestURI());
         return true;
         }
     }

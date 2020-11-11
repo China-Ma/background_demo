@@ -52,4 +52,11 @@ public class LoginServiceImpl implements LoginService{
         }
         return false;
     }
+
+    @Override
+    public List selectAll() {
+        LoginExample example = new LoginExample();
+        List list = loginMapper.selectByExample(example);
+        return list;
+    }
 }

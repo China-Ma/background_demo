@@ -1,5 +1,6 @@
 package com.happyfoal.background_demo.configuration;
 
+import com.happyfoal.background_demo.filter.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -28,14 +29,14 @@ public class WebConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // addPathPatterns("/**") 表示拦截所有的请求
         // excludePathPatterns("/login", "/register") 表示除了登陆与注册之外，因为登陆注册不需要登陆也可以访问
-        // registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/","/login", "/dologin","/static/**");
+        // registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login", "dologin","/static/**","/templates/**");
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 
     //设置默认页面
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("/login");
+        // registry.addViewController("/").setViewName("/login");
         //设置优先级  当请求地址有重复的时候  执行优先级最高的
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         WebMvcConfigurer.super.addViewControllers(registry);

@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author majiaju
@@ -20,12 +19,12 @@ public class AdminController {
     LoginService loginService;
 
     @RequestMapping("/")
-    public String init(){
+    public String in1(){
         return "login";
     }
 
     @RequestMapping("/login")
-    public String in(){
+    public String in2(){
         return "login";
     }
 
@@ -48,14 +47,20 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/dologin",method = RequestMethod.POST)
-    public String login(Login login, HttpServletRequest request){
+    public String login(Login login, HttpSession session){
         boolean flag = loginService.login(login);
         if (flag){
-            request.getSession().setAttribute("login",login);
-            return "success";
+            session.setAttribute("login",login);
+            return "redirect:/static/index.html";
         }
         return "fail";
     }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("login");
+        return "login";
+    }
+
 
 
 }
