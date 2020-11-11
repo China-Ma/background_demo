@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author majiaju
  * @date
@@ -18,18 +20,24 @@ public class AdminController {
     LoginService loginService;
 
     @RequestMapping("/")
+    public String init(){
+        return "login";
+    }
+
+    @RequestMapping("/login")
     public String in(){
         return "login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(Login login){
-
+    @RequestMapping(value = "/dologin",method = RequestMethod.POST)
+    public String login(Login login, HttpServletRequest request){
         boolean flag = loginService.login(login);
+
         if (flag){
-            return "index";
+            request.getSession().setAttribute("login",login);
+            return "success";
         }
-        return "error";
+        return "fail";
     }
 
 
