@@ -32,7 +32,6 @@ public class AdminController {
     @RequestMapping(value = "/dologin",method = RequestMethod.POST)
     public String login(Login login, HttpServletRequest request){
         boolean flag = loginService.login(login);
-
         if (flag){
             request.getSession().setAttribute("login",login);
             return "success";
