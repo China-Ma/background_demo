@@ -3,6 +3,7 @@ package com.happyfoal.background_demo.filter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException, ServletException {
         //每一个项目对于登陆的实现逻辑都有所区别，我这里使用最简单的Session提取User来验证登陆
-
-
+        if (handler instanceof ResourceHttpRequestHandler) {
+            return true;
+        }
         HttpSession session = request.getSession();
 
         //这里的User是登陆时放入session的
