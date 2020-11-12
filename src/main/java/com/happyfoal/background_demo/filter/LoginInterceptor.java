@@ -41,7 +41,12 @@ public class LoginInterceptor implements HandlerInterceptor {
         //如果session里有user，表示该用户已经登陆，放行，用户即可继续调用自己需要的接口
         System.out.println("进入拦截器......");
         System.out.println(request.getRequestURL().toString());
-        response.sendRedirect("http://localhost:8083"+url);
+        if (url.length()==0){
+            String path = request.getRequestURL().toString();
+            response.sendRedirect(path);
+            return true;
+        }
+        response.sendRedirect("http://localhost:8083" + url);
         return false;
         }
     }

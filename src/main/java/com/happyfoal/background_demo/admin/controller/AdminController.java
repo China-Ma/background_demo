@@ -51,6 +51,7 @@ public class AdminController {
         boolean flag = loginService.login(login);
         if (flag){
             session.setAttribute("login",login);
+            session.setAttribute("url","");
             return "redirect:/static/index.html";
         }
         return "fail";
