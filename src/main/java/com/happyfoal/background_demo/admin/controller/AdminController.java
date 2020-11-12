@@ -56,11 +56,9 @@ public class AdminController {
         return "fail";
     }
     @RequestMapping("/logout")
-    public String logout(HttpSession session){
-        session.removeAttribute("login");
-        return "login";
+    public void logout(HttpSession session){
+        // session.removeAttribute("login");
+        session.setAttribute("url","/static/admin/register.html");
     }
-
-
 
 }

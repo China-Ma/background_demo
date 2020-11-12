@@ -26,6 +26,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
         HttpSession session = request.getSession();
+        String url = session.getAttribute("url").toString();
 
         //这里的User是登陆时放入session的
 
@@ -39,9 +40,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         } else {
         //如果session里有user，表示该用户已经登陆，放行，用户即可继续调用自己需要的接口
         System.out.println("进入拦截器......");
-        System.out.println(request.getRequestURL());
-        response.sendRedirect(request.getRequestURI());
-        return true;
+        System.out.println(request.getRequestURL().toString());
+        response.sendRedirect("http://localhost:8083"+url);
+        return false;
         }
     }
 
